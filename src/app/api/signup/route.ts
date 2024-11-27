@@ -32,14 +32,13 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-    const event = await validateRequest(request);
+    const event = await validateRequest(request) as unknown as ClerkPayload;
     console.log(JSON.stringify(event, null, 2));
-    const body = await request.json() as ClerkPayload;
+    // const body = await request.json() as ClerkPayload;
 
-    console.log(JSON.stringify(body, null, 2));
 
     // Validate request came from Clerk
-    const wallet = body.data.web3_wallets[0].web3_wallet;
+    const wallet = event.data.web3_wallets[0].web3_wallet;
     if (!wallet) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
