@@ -56,7 +56,7 @@ export async function POST(req: Request) {
     }
 
     // Do something with payload
-    await HandleTransfer(evt as unknown as ClerkPayload);
+    await handleTransfer(evt as unknown as ClerkPayload);
     // For this guide, log payload to console
     const { id } = evt.data
     const eventType = evt.type
@@ -72,7 +72,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: 'Hello from Next.js!' })
 }
 
-export async function HandleTransfer(event: ClerkPayload) {
+async function handleTransfer(event: ClerkPayload) {
 
     // const body = await request.json() as ClerkPayload;
 
@@ -89,7 +89,14 @@ export async function HandleTransfer(event: ClerkPayload) {
     if (!privateKey) {
         return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
-    const signer = new ethers.Wallet(privateKey);
+    // Base RPC URL (replace with a reliable RPC provider)
+    const baseRpcUrl = process.env.BASE_RPC_URL;
+
+    // Create a provider for the Base network
+    const provider = new ethers.JsonRpcProvider(baseRpcUrl);
+
+    // Create a signer using the private key and provider
+    const signer = new ethers.Wallet(privateKey, provider);
 
 
 
