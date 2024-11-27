@@ -1,10 +1,30 @@
+import { WebhookEvent } from '@clerk/nextjs/server';
 import { ethers } from "ethers";
+import { headers } from 'next/headers';
 import { NextResponse } from "next/server";
+import { Webhook } from 'svix';
 
 const USDC_CONTRACT_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const USDC_ABI = [
     "function transfer(address to, uint256 amount) public returns (bool)",
 ];
+
+
+const webhookSecret = process.env.CLERK_SIGNING_KEY || ``
+
+async function validateRequest(request: Request) {
+    const payloadString = await request.text()
+    const headerPayload = await headers()
+
+    const svixHeaders = {
+        'svix-id': headerPayload.get('svix-id')!,
+        'svix-timestamp': headerPayload.get('svix-timestamp')!,
+        'svix-signature': headerPayload.get('svix-signature')!,
+    }
+    const wh = new Webhook(webhookSecret)
+    return wh.verify(payloadString, svixHeaders) as WebhookEvent
+}
+
 
 export async function GET(request: Request) {
     console.log(`${request}`);
@@ -12,6 +32,8 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+    const event = await validateRequest(request);
+    console.log(JSON.stringify(event, null, 2));
     const body = await request.json() as ClerkPayload;
 
     console.log(JSON.stringify(body, null, 2));
