@@ -7,6 +7,7 @@ import {
 } from '@clerk/nextjs';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import GlassButton from './components/GlassButton';
 import "./globals.css";
 
 const geistSans = localFont({
@@ -38,7 +39,11 @@ export default function RootLayout({
         >
           <div className="fixed top-4 right-4 z-50">
             <SignedOut>
-              <SignInButton />
+              <SignInButton>
+                <GlassButton>
+                  Login
+                </GlassButton>
+              </SignInButton>
             </SignedOut>
             <SignedIn>
               <UserButton />
