@@ -21,6 +21,7 @@ export default function SnowCanvas() {
 
         // Set canvas size to window size
         const resizeCanvas = () => {
+            if (!canvas) return;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         };
@@ -36,6 +37,8 @@ export default function SnowCanvas() {
         }));
 
         // Animation loop
+        let animationFrameId: number;
+
         function animate() {
             ctx.fillStyle = '#AFCEFF';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -56,13 +59,15 @@ export default function SnowCanvas() {
                 }
             });
 
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
         }
 
         animate();
 
+        // Cleanup function
         return () => {
             window.removeEventListener('resize', resizeCanvas);
+            cancelAnimationFrame(animationFrameId);
         };
     }, []);
 
