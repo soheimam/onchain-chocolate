@@ -6,19 +6,22 @@ import {
   UserButton
 } from '@clerk/nextjs';
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Poppins, Varela_Round } from "next/font/google";
 import GlassButton from './components/GlassButton';
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const varelaRound = Varela_Round({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-varela-round',
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
 });
 
 export const metadata: Metadata = {
@@ -35,13 +38,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${varelaRound.variable} ${poppins.variable} font-poppins antialiased`}
         >
           <div className="fixed top-4 right-4 z-50">
             <SignedOut>
               <SignInButton>
                 <GlassButton>
-                  Login
+                  Order a hot chocolate
                 </GlassButton>
               </SignInButton>
             </SignedOut>
