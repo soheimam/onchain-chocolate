@@ -8,7 +8,7 @@ export default function Home() {
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start px-8 sm:px-20">
           <h1>Hello Hot chocolate</h1>
         </main>
-        <footer className="row-start-3 w-screen bg-white h-full">
+        <footer className="row-start-3 w-screen bg-white h-full relative z-20">
           {/* Snow ground */}
         </footer>
       </div>

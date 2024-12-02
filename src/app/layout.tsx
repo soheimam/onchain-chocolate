@@ -8,6 +8,7 @@ import {
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -31,21 +32,23 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased flex items-center justify-center`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-          {children}
+          <div className="fixed top-4 right-4 z-50">
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
+          <div className="relative z-10 flex items-center justify-center min-h-screen w-full">
+            {children}
+          </div>
         </body>
       </html>
     </ClerkProvider>
-
   );
 }
