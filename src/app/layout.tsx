@@ -34,7 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider signInFallbackRedirectUrl="/store"
+      signUpFallbackRedirectUrl="/store">
       <html lang="en">
         <body
           className={`${varelaRound.variable} ${poppins.variable} font-poppins antialiased`}
