@@ -6,7 +6,7 @@ import {
 } from '@clerk/nextjs';
 import type { Metadata } from "next";
 import { Poppins, Varela_Round } from "next/font/google";
-import SignInModal from './components/SignInModal';
+import SignInModal from '../components/SignInModal';
 import "./globals.css";
 
 const varelaRound = Varela_Round({
@@ -34,8 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider signInFallbackRedirectUrl="/store"
-      signUpFallbackRedirectUrl="/store">
+    <ClerkProvider >
       <html lang="en">
         <body
           className={`${varelaRound.variable} ${poppins.variable} font-poppins antialiased`}

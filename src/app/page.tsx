@@ -1,4 +1,4 @@
-import SnowCanvas from './components/SnowCanvas';
+import SnowCanvas from '../components/SnowCanvas';
 
 export default function Home() {
   return (

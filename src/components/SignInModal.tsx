@@ -1,5 +1,6 @@
 'use client';
 
+import GlassButton from '@/components/GlassButton';
 import {
     Dialog,
     DialogContent,
@@ -10,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { SignIn, useSignIn } from '@clerk/nextjs';
 import { useState } from 'react';
-import GlassButton from './GlassButton';
 
 export default function SignInModal() {
     const [isOpen, setIsOpen] = useState(false);
