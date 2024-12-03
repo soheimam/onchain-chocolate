@@ -11,6 +11,7 @@ interface Snowflake {
 
 export default function SnowCanvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const backgroundImageRef = useRef<HTMLImageElement | null>(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -18,6 +19,11 @@ export default function SnowCanvas() {
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
+
+        // Load background image
+        const backgroundImage = new Image();
+        backgroundImage.src = '/snow_vector_bg.svg';
+        backgroundImageRef.current = backgroundImage;
 
         // Set canvas size to window size
         const resizeCanvas = () => {
@@ -36,13 +42,34 @@ export default function SnowCanvas() {
             speed: Math.random() * 0.5 + 0.5,
         }));
 
+        // Function to draw background
+        const drawBackground = () => {
+            if (!canvas || !ctx || !backgroundImageRef.current?.complete) return;
+
+            const img = backgroundImageRef.current;
+            ctx.drawImage(
+                img,
+                0, // X position at left edge
+                0, // Y position at top
+                canvas.width,
+                canvas.height // Full height of canvas
+            );
+        };
+
         // Animation loop
         let animationFrameId: number;
 
         function animate() {
+            if (!canvas || !ctx) return;
+
+            // Clear canvas with sky blue background
             ctx.fillStyle = '#AFCEFF';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Draw background image
+            drawBackground();
+
+            // Draw snowflakes
             ctx.fillStyle = 'white';
             snowflakes.forEach(flake => {
                 ctx.beginPath();

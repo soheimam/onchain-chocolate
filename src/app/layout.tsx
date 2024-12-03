@@ -1,13 +1,12 @@
 import {
   ClerkProvider,
-  SignInButton,
   SignedIn,
   SignedOut,
   UserButton
 } from '@clerk/nextjs';
 import type { Metadata } from "next";
 import { Poppins, Varela_Round } from "next/font/google";
-import GlassButton from './components/GlassButton';
+import SignInModal from './components/SignInModal';
 import "./globals.css";
 
 const varelaRound = Varela_Round({
@@ -42,11 +41,7 @@ export default function RootLayout({
         >
           <div className="fixed top-4 right-4 z-50">
             <SignedOut>
-              <SignInButton>
-                <GlassButton>
-                  Order a hot chocolate
-                </GlassButton>
-              </SignInButton>
+              <SignInModal />
             </SignedOut>
             <SignedIn>
               <UserButton />

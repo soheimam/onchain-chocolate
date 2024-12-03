@@ -14,7 +14,7 @@ const GlassButton: React.FC<GlassButtonProps> = ({ children, className, ...props
                 "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg",
                 "border border-white border-opacity-30",
                 "text-white font-semibold",
-                "shadow-lg",
+                "shadow-sm",
                 "transition-all duration-300 ease-in-out",
                 "hover:bg-opacity-30 hover:scale-105",
                 "focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50",
