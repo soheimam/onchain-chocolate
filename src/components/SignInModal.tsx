@@ -47,7 +47,6 @@ export default function SignInModal() {
                             }
                         }}
                         routing="hash"
-                        afterSignInUrl="/"
                         signUpUrl="#sign-up"
                     />
                 </div>

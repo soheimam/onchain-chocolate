@@ -2,11 +2,14 @@ import {
   ClerkProvider,
   SignedIn,
   SignedOut,
+  SignInButton,
   UserButton
 } from '@clerk/nextjs';
 import type { Metadata } from "next";
 import { Poppins, Varela_Round } from "next/font/google";
-import SignInModal from '../components/SignInModal';
+// import SignInModal from '../components/SignInModal';
+import '@coinbase/onchainkit/styles.css';
+
 import "./globals.css";
 
 const varelaRound = Varela_Round({
@@ -34,14 +37,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider >
+    <ClerkProvider signInForceRedirectUrl={"/store"} signUpFallbackRedirectUrl={"/store"}>
       <html lang="en">
         <body
           className={`${varelaRound.variable} ${poppins.variable} font-poppins antialiased`}
         >
           <div className="fixed top-4 right-4 z-50">
             <SignedOut>
-              <SignInModal />
+              <SignInButton mode='modal' />
             </SignedOut>
             <SignedIn>
               <UserButton />
