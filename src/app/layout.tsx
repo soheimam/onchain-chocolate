@@ -1,22 +1,20 @@
 import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton
+  ClerkProvider
 } from '@clerk/nextjs';
 import type { Metadata } from "next";
-import { Poppins, Varela_Round } from "next/font/google";
+import { Libre_Baskerville, Poppins } from "next/font/google";
 // import SignInModal from '../components/SignInModal';
 import '@coinbase/onchainkit/styles.css';
-
+// import { OnchainKitProvider } from '@coinbase/onchainkit';
+// import { base } from 'wagmi/chains';
+import { Providers } from '@/providers/WalletProvider';
 import "./globals.css";
 
-const varelaRound = Varela_Round({
+const libreBaskerville = Libre_Baskerville({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-varela-round',
+  variable: '--font-libre-baskerville',
 });
 
 const poppins = Poppins({
@@ -40,19 +38,12 @@ export default function RootLayout({
     <ClerkProvider signInForceRedirectUrl={"/store"} signUpFallbackRedirectUrl={"/store"}>
       <html lang="en">
         <body
-          className={`${varelaRound.variable} ${poppins.variable} font-poppins antialiased`}
+          className={`${libreBaskerville.variable} ${poppins.variable} font-libreBaskerville  antialiased bg-[#D3E5F4]"`}
         >
-          <div className="fixed top-4 right-4 z-50">
-            <SignedOut>
-              <SignInButton mode='modal' />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </div>
-          <div className="relative z-10 flex items-center justify-center min-h-screen w-full">
-            {children}
-          </div>
+
+
+          <Providers>{children}</Providers>
+
         </body>
       </html>
     </ClerkProvider>
