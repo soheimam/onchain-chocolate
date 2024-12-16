@@ -23,7 +23,7 @@ export default function Home() {
                 </SignedIn>
               </div>
               <div className="flex flex-col items-start">
-                <h2 className="text-4xl md:text-6xl font-semibold mb-4 text-white font-libreBaskerville">Claim Hot chocolate</h2>
+                <h2 className="text-4xl  font-semibold mb-4 text-white font-libreBaskerville">Claim Hot chocolate</h2>
                 <Button className="text-bold text-white ">
 
                   <SignedOut>
